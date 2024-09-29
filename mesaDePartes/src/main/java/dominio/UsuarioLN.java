@@ -1,0 +1,25 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dominio;
+
+import Util.UsuarioU;
+import model.Usuario;
+
+/**
+ *
+ * @author crist
+ */
+public class UsuarioLN {
+    UsuarioU user = new UsuarioU();
+    
+    public boolean leeLogin(String usr, String pss){
+        return user.leeLogin(usr, pss);
+    }
+
+    public int agregaUsuario(Usuario usuario) {
+        return user.agregaUsuario(usuario);
+    }
+    
+}
