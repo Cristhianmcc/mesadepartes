@@ -131,7 +131,9 @@ public class Login extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o Contraseña incorrecta");
         }
-        
+        Principal principalForm = new Principal();
+        principalForm.setVisible(true);
+        this.dispose();
 //        UsuarioU usuario  = new UsuarioU();
 //        
 //        if (usuario.leeLogin(user,pass)) {
