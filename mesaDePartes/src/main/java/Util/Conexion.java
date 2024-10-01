@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
+
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class Conexion {
-   private String url = "jdbc:mysql://localhost:3306/mesadepartes";
+   private String url = "jdbc:mysql://localhost:3306/mesa";
    private String usr = "root";
    private String pass = "root";
    
