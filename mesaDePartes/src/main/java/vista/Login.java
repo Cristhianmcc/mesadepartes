@@ -10,10 +10,8 @@ import javax.swing.JOptionPane;
 
 
 
-/**
- *
- * @author crist
- */
+
+ 
 public class Login extends javax.swing.JFrame {
 
     UsuarioLN lN = new UsuarioLN();
