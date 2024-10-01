@@ -11,12 +11,14 @@ package model;
 public class Usuario {
     
     private int id;
+    private int dni;
     private String apellidos;
     private String nombres;
     private String correo;
     private String nomusuario;
     private String clave;
     private String estado;
+    private String fecha;
 
     public int getId() {
         return id;
@@ -73,4 +75,22 @@ public class Usuario {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+  
 }
