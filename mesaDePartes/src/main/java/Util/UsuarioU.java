@@ -70,26 +70,28 @@ public class UsuarioU extends Conexion {
 //        db.leeLogin("cristhian", "qwert");        
 //        }
     //todo esto comentado se hizo para poder probar si estaba bien la lectura de usuario y clave
-        public int agregaUsuario(Usuario usuario){
-        try {
-            sql = "insert into usuario (apellidos,nombres,correo,nomusuario,clave) values (?,?,?,?,?)";
-            cone = getConexion();
-            
-            pst = cone.prepareStatement(sql);
-            
-            pst.setString(1,usuario.getApellidos());
-            pst.setString(2,usuario.getNombres());
-            pst.setString(3,usuario.getCorreo());
-            pst.setString(4,usuario.getNomusuario());
-            pst.setString(5,usuario.getClave());
-            
-            return pst.executeUpdate();
-   
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error en insertar usuario" +ex.getMessage());
-        }
-           return 0; 
-    }
+//        public int agregaUsuario(Usuario usuario){
+//        try {
+//            sql = "insert into usuarios (dni,apellidos,nombres,correo,nomusuario,contraseña) values (?,?,?,?,?,?,?)";
+//            cone = getConexion();
+//            
+//            pst = cone.prepareStatement(sql);
+//            
+//            pst.setInt(1, usuario.getDni());
+//            pst.setString(2,usuario.getApellidos());
+//            pst.setString(3,usuario.getNombres());
+//            pst.setString(4,usuario.getCorreo());
+//            pst.setString(5,usuario.getNomusuario());
+//            pst.setString(6,usuario.getClave());
+//            pst.setString(7, usuario.getFecha());
+//            
+//            return pst.executeUpdate();
+//   
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null,"Error en insertar usuario" +ex.getMessage());
+//        }
+//           return 0; 
+//    }
 //        public static void main(String[] args) {
 //        UsuarioU db = new UsuarioU();
 //        Usuario u = new Usuario();
@@ -246,15 +248,21 @@ public class UsuarioU extends Conexion {
         
         public int grabarUsuario(Usuario usuario){
             
+
         try {
             cone = getConexion();
-            cst = cone.prepareCall("{call grabarUsuario(?,?,?,?,?)}");
             
-            cst.setString(1, usuario.getApellidos());
-            cst.setString(2, usuario.getNombres());
-            cst.setString(3, usuario.getCorreo());
-            cst.setString(4, usuario.getNomusuario());
-            cst.setString(5, usuario.getClave());
+
+            cst = cone.prepareCall("{call grabarUsuario(?,?,?,?,?,?,?)}");
+            
+            cst.setInt(1, usuario.getDni());
+            cst.setString(2, usuario.getApellidos());
+            cst.setString(3, usuario.getNombres());
+            cst.setString(4, usuario.getCorreo());
+            cst.setString(5, usuario.getNomusuario());
+            cst.setString(6, usuario.getClave());
+            cst.setString(7, usuario.getFecha());
+            
             
             return cst.executeUpdate();
                     

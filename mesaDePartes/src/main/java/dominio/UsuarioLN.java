@@ -18,8 +18,8 @@ public class UsuarioLN {
         return user.leeLogin(usr, pss);
     }
 
-    public int agregaUsuario(Usuario usuario) {
-        return user.agregaUsuario(usuario);
+    public int grabarUsuario(Usuario usuario) {
+        return user.grabarUsuario(usuario);
     }
     
 }
