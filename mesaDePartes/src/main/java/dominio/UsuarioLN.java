@@ -4,8 +4,8 @@
  */
 package dominio;
 
-import Util.UsuarioU;
-import model.Usuario;
+import persistencia.UsuarioU;
+import entidad.Usuario;
 
 /**
  *
