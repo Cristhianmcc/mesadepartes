@@ -4,12 +4,12 @@
  */
 package dominio;
 
-import Entidad.OficinasC;
-import Entidad.TramitesC;
-import Persistencia.UsuarioU;
-import Entidad.Usuario;
-import Persistencia.OficinasDb;
-import Persistencia.TramitesDb;
+import entidad.OficinasC;
+import entidad.TramitesC;
+import persistencia.UsuarioU;
+import entidad.Usuario;
+import persistencia.OficinasDb;
+import persistencia.TramitesDb;
 
 
 public class UsuarioLN {

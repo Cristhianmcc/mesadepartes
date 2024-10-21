@@ -1,7 +1,7 @@
-package vista;
+package presentacion;
 
-import Entidad.OficinasC;
-import Persistencia.Conexion;
+import entidad.OficinasC;
+import persistencia.Conexion;
 import dominio.OficinasLN;
 import dominio.UsuarioLN;
 import java.beans.Statement;
@@ -149,7 +149,7 @@ public class oficinas extends javax.swing.JFrame {
             txtDescripcion.setText("");
             txtNombreO.setText("");
 
-            Entidad.OficinasC frm = new Entidad.OficinasC();
+            entidad.OficinasC frm = new entidad.OficinasC();
             frm.setVisible(true);
             this.dispose();
         } else {
@@ -191,7 +191,7 @@ public class oficinas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        oficina = new Entidad.OficinasC();
+        oficina = new entidad.OficinasC();
 
         oficina.setNombre(txtNombreO.getText());
         oficina.setDescripcion(txtDescripcion.getText());
@@ -213,7 +213,7 @@ public class oficinas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarçActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarçActionPerformed
-        oficina = new Entidad.OficinasC();
+        oficina = new entidad.OficinasC();
         String nombre = txtNombreO.getText();
         try {
             int editar = bo.eliminaOficina(nombre);

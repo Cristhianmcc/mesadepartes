@@ -4,8 +4,8 @@
  */
 package dominio;
 
-import Entidad.OficinasC;
-import Persistencia.OficinasDb;
+import entidad.OficinasC;
+import persistencia.OficinasDb;
 
 /**
  *

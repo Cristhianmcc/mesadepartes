@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista;
+package presentacion;
 
-import Entidad.TramitesC;
+import entidad.TramitesC;
 import dominio.UsuarioLN;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -185,7 +185,7 @@ public class tramites extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Registro exitoso");
             limpiar();
 
-            Entidad.TramitesC frm = new Entidad.TramitesC();
+            entidad.TramitesC frm = new entidad.TramitesC();
             frm.setVisible(true);
             this.dispose();
         } else {
@@ -195,7 +195,7 @@ public class tramites extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       tramite = new Entidad.TramitesC();
+       tramite = new entidad.TramitesC();
 
         tramite.setNombre_tramite(txtNombret.getText());
         tramite.setDescripcion(txtDescriocion.getText());
@@ -211,7 +211,7 @@ public class tramites extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         tramite = new Entidad.TramitesC();
+         tramite = new entidad.TramitesC();
         tramite.setNombre_tramite(txtNombret.getText());
         int editar = user.eliminaTramite(tramite);
         if (editar == 1) {

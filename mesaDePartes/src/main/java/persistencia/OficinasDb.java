@@ -1,6 +1,6 @@
-package Persistencia;
+package persistencia;
 
-import Entidad.OficinasC;
+import entidad.OficinasC;
 import java.beans.Statement;
 import java.sql.CallableStatement;
 import java.sql.Connection;
