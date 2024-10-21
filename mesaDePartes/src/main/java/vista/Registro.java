@@ -6,7 +6,7 @@ package vista;
 
 import dominio.UsuarioLN;
 import javax.swing.JOptionPane;
-import model.Usuario;
+import Entidad.Usuario;
 
 /**
  *
