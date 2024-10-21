@@ -4,7 +4,7 @@
  */
 package vista;
 
-import Util.UsuarioU;
+import Persistencia.UsuarioU;
 import dominio.UsuarioLN;
 import javax.swing.JOptionPane;
 
