@@ -173,7 +173,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        Registro registroForm = new Registro(); 
+        Registro registroForm = new Registro();
+        
         registroForm.setVisible(true); //esto hace visible el formulario de registro
         this.dispose(); //esto es para esconder el formulario del login
     }//GEN-LAST:event_btnRegistrarActionPerformed
