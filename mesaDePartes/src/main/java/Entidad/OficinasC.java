@@ -20,8 +20,9 @@ public class OficinasC {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
+
+//    public void setVisible(boolean b) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//}

@@ -1,4 +1,4 @@
-package vista;
+package presentacion;
 
 import Entidad.OficinasC;
 import Persistencia.Conexion;
@@ -135,6 +135,7 @@ public class oficinas extends javax.swing.JFrame {
         getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -149,9 +150,9 @@ public class oficinas extends javax.swing.JFrame {
             txtDescripcion.setText("");
             txtNombreO.setText("");
 
-            Entidad.OficinasC frm = new Entidad.OficinasC();
-            frm.setVisible(true);
-            this.dispose();
+//            Entidad.OficinasC frm = new Entidad.OficinasC();
+//            frm.setVisible(true);
+//            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Registro no exitoso");
 
