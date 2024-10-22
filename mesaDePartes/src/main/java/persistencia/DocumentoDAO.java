@@ -45,13 +45,13 @@ public class DocumentoDAO extends Conexion {
         }
            return 0; 
     }
- public static void main(String[] args) {
-       DocumentoDAO db = new DocumentoDAO();
-       DocumentoE documento = new DocumentoE();
-        documento.setNombreDocumento("FUT");
-        documento.setRuta("Instagram");
-        
-        System.out.println(db.agregarDocumento(documento));
-
-    }
+// public static void main(String[] args) {
+//       DocumentoDAO db = new DocumentoDAO();
+//       DocumentoE documento = new DocumentoE();
+//        documento.setNombreDocumento("FUT");
+//        documento.setRuta("Instagram");
+//        
+//        System.out.println(db.agregarDocumento(documento));
+//
+//    }
 }
