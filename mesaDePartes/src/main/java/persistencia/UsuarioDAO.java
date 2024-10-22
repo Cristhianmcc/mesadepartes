@@ -23,7 +23,7 @@ import entidad.Usuario;
  *
  * @author crist
  */
-public class UsuarioU extends Conexion {
+public class UsuarioDAO extends Conexion {
 
     public static boolean leeLogin;
     
@@ -66,7 +66,7 @@ public class UsuarioU extends Conexion {
 //        return false;
 //    }
 //    public static void main(String[] args) {
-//        UsuarioU db = new UsuarioU();
+//        UsuarioDAO db = new UsuarioDAO();
 //        db.leeLogin("cristhian", "qwert");        
 //        }
     //todo esto comentado se hizo para poder probar si estaba bien la lectura de usuario y clave
@@ -93,7 +93,7 @@ public class UsuarioU extends Conexion {
 //           return 0; 
 //    }
 //        public static void main(String[] args) {
-//        UsuarioU db = new UsuarioU();
+//        UsuarioDAO db = new UsuarioDAO();
 //        Usuario u = new Usuario();
 //        u.setApellidos("Pio");
 //        u.setNombres("miguel");
@@ -123,14 +123,14 @@ public class UsuarioU extends Conexion {
             return pst.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
             
           return 0;
             
         }
 //        public static void main(String[] args) {
-//        UsuarioU p = new UsuarioU();
+//        UsuarioDAO p = new UsuarioDAO();
 //        Usuario u = new Usuario();
 //        
 //        u.setId(2);
@@ -154,12 +154,12 @@ public class UsuarioU extends Conexion {
             return pst.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
         }
 //        public static void main(String[] args) {
-//        UsuarioU p = new UsuarioU();
+//        UsuarioDAO p = new UsuarioDAO();
 //        
 //        System.out.println(p.eliminaUsuario(1));
         
@@ -190,13 +190,13 @@ public class UsuarioU extends Conexion {
 //            return listaUsuario;
 //            
 //        } catch (SQLException ex) {
-//            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //            return null;
 //        }
         
 //        public static void main(String[] args) {
-//        UsuarioU p = new UsuarioU();
+//        UsuarioDAO p = new UsuarioDAO();
 //        
 //        ArrayList<Usuario> listaUsuarios = p.todoUsuario();
 //            if (listaUsuarios !=null && !listaUsuarios.isEmpty()) {
@@ -242,7 +242,7 @@ public class UsuarioU extends Conexion {
         }
         
 //        public static void main(String[] args) {
-//        UsuarioU db = new UsuarioU();
+//        UsuarioDAO db = new UsuarioDAO();
 //        db.leeLogin("piota", "qwert");
 //    }
         
@@ -268,13 +268,13 @@ public class UsuarioU extends Conexion {
                     
                     
             } catch (SQLException ex) {
-            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
         }
         
 //        public static void main(String[] args) {
-//        UsuarioU p = new UsuarioU();
+//        UsuarioDAO p = new UsuarioDAO();
 //        Usuario u = new Usuario();
 //        
 //        u.setApellidos("Medina");
@@ -301,13 +301,13 @@ public class UsuarioU extends Conexion {
             return cst.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
         }
         
 //        public static void main(String[] args) {
-//        UsuarioU a = new UsuarioU();
+//        UsuarioDAO a = new UsuarioDAO();
 //        Usuario u = new Usuario();
 //        
 //        u.setId(3);
@@ -330,13 +330,13 @@ public class UsuarioU extends Conexion {
             return cst.executeUpdate();
             
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
         }
         
 //        public static void main(String[] args) {
-//        UsuarioU u = new UsuarioU();
+//        UsuarioDAO u = new UsuarioDAO();
 //            System.out.println(u.eliminaUsuario(3));
 //        
 //    }
@@ -362,14 +362,14 @@ public class UsuarioU extends Conexion {
                 listaUsuario.add(nuevoUsuario);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioU.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
            return listaUsuario;
            
        }      
        
        public static void main(String[] args) {
-    UsuarioU p = new UsuarioU();
+    UsuarioDAO p = new UsuarioDAO();
     
     ArrayList<Usuario> listaUsuario = p.listarUsuarios();  // Llamar al método correcto
     if (listaUsuario != null && !listaUsuario.isEmpty()) {  // Corrección de la sintaxis
