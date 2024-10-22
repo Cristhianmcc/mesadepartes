@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package vista;
 
 import persistencia.UsuarioU;
 import dominio.UsuarioLN;
@@ -10,10 +10,9 @@ import javax.swing.JOptionPane;
 
 
 
-/**
- *
- * @author crist
- */
+
+
+ 
 public class Login extends javax.swing.JFrame {
 
     UsuarioLN lN = new UsuarioLN();

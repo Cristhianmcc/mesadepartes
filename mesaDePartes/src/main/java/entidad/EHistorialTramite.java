@@ -10,35 +10,9 @@ package entidad;
  */
 public class EHistorialTramite {
 
-    private int idHistorial;
-    private int idTramiteUsuario;
-    private int idEstado;
+    private int id;
     private String fechaCambio;
     private String comentario;
-
-    public int getIdHistorial() {
-        return idHistorial;
-    }
-
-    public void setIdHistorial(int idHistorial) {
-        this.idHistorial = idHistorial;
-    }
-
-    public int getIdTramiteUsuario() {
-        return idTramiteUsuario;
-    }
-
-    public void setIdTramiteUsuario(int idTramiteUsuario) {
-        this.idTramiteUsuario = idTramiteUsuario;
-    }
-
-    public int getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdEstado(int idEstado) {
-        this.idEstado = idEstado;
-    }
 
     public String getFechaCambio() {
         return fechaCambio;
@@ -55,6 +29,18 @@ public class EHistorialTramite {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+
+  
     
     
 
