@@ -4,18 +4,23 @@
  */
 package presentacion;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import dominio.DocumentoLN;
+import entidad.DocumentosE;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import persistencia.DocumentosDAO;
 
 /**
  *
  * @author crist
  */
 public class Principal extends javax.swing.JFrame {
-
+DocumentosE documento = new DocumentosE();
     public Principal() {
         initComponents();
-        cargarLogo();
         setLocationRelativeTo(null);
     }
 
@@ -34,41 +39,33 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboTipoDocumento = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtFolios = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtDni = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtAsunto = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        btnArchivo = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txtUrl = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
+        cboDocumento = new javax.swing.JComboBox<>();
+        txtDependecia = new javax.swing.JTextField();
+        cboTramite = new javax.swing.JComboBox<>();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtCorreo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        lbllogo = new javax.swing.JLabel();
+        lblNombreArchivo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 153));
@@ -77,14 +74,29 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 0));
         jLabel1.setText("Registrando Nuevo Documento");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 380, 37));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 505, 76));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 62, 763, 53));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,150 +105,86 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 51));
         jLabel3.setText("Tipo de Documento:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "Carnet De Extranjería" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 189, -1));
+        cboTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Item 2", "Item 3", "Item 4", "em 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(cboTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 61, 210, -1));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("Documento:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 91, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 91, -1));
+        jPanel3.add(txtFolios, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 123, -1));
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 123, -1));
-
-        jTextField2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 112, -1));
-
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel5.setText("N° Folios:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 74, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 74, -1));
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel6.setText("Fecha:");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 41, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 41, -1));
+        jPanel3.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, -1));
 
-        jTextField3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 160, -1));
-
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel7.setText("Dni del Firmante:");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 102, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 102, -1));
+        jPanel3.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 61, 159, -1));
 
-        jTextField4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 159, -1));
-
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel8.setText("Nombre del Firmante:");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 132, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 38, 132, -1));
+        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 61, 245, -1));
 
-        jTextField5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 245, -1));
+        jLabel16.setText("Asunto (tal y como está consignado en sudocumento)* :");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 313, -1));
+        jPanel3.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 660, 80));
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel9.setText("Cargo del Firmante:");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 125, -1));
-
-        jTextField6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 200, -1));
-
-        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel16.setText("Asunto (tal y como está consignado en su documento)* :");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 340, -1));
-
-        jTextField10.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 710, 103));
-
-        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel17.setText("Dependencia(s) Destino(s)*");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 173, -1));
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 173, -1));
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel18.setText("Archivo (PDF máx 5 MB)* :");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, 159, -1));
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 159, -1));
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButton1.setText("Seleccionar archivo |  Ningún archivo seleccionado");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 480, 360, -1));
+        btnArchivo.setText("Seleccionar archivo |  Ningún archivo seleccionado");
+        btnArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchivoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, 293, -1));
 
-        jComboBox5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 264, -1));
-
-        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel19.setText("URL del Anexo (leer indicaciones):");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 530, 220, -1));
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 197, -1));
+        jPanel3.add(txtUrl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 307, -1));
 
-        jTextField11.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 560, 307, -1));
-
-        jButton2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jButton2.setText("Enviar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEnviarActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 590, 91, 38));
+        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 91, 38));
 
-        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel10.setText("Departamento");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 95, 20));
+        cboDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(cboDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 170, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 183, -1));
+        txtDependecia.setText("El Director");
+        jPanel3.add(txtDependecia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 250, -1));
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel11.setText("Provincia");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 73, -1));
+        cboTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(cboTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 180, -1));
 
-        jComboBox3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 190, -1));
+        jLabel20.setText("Trámite");
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel12.setText("Distrito");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 98, -1));
+        jLabel9.setText("Correo Electronico: ");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        jPanel3.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 230, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 180, -1));
 
-        jComboBox4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 170, -1));
+        lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 370, 310, 20));
 
-        jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel13.setText("Dirección");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 81, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 763, 540));
 
-        jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel14.setText("Celular:");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 59, -1));
-
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel15.setText("Correo");
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 63, -1));
-
-        jTextField7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 260, -1));
-
-        jTextField8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 127, -1));
-
-        jTextField9.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 240, -1));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 763, 650));
-        jPanel1.add(lbllogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 130, 130));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel2.setText("MIS TRAMITES");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 50));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -244,29 +192,88 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private String generarNumeroExpediente() {
+    return "EXP-" + (int)(Math.random() * 100000);
+}
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        // Configurar los demás datos en el objeto DocumentosE existente
+    documento.setTipo_documento(cboDocumento.getSelectedItem().toString());
+    documento.setDni(txtDni.getText());
+    documento.setNombre(txtNombre.getText());
+    documento.setCorreo(txtCorreo.getText());
+    documento.setDocumento(cboDocumento.getSelectedItem().toString());
+    documento.setTramite(cboTramite.getSelectedItem().toString());
+    documento.setFolio(Integer.parseInt(txtFolios.getText()));
+    documento.setFecha(java.sql.Date.valueOf(txtFecha.getText())); // Asegúrate del formato
+    documento.setAsunto(txtAsunto.getText());
+    documento.setDep_destino(txtDependecia.getText());
+    documento.setUrl(txtUrl.getText());
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    // Generar y asignar número de expediente
+    String numeroExpediente = generarNumeroExpediente();
+    documento.setNumero_expediente(numeroExpediente);
+
+    // Verificar si el archivo fue seleccionado
+    if (documento.getArchivo() == null) {
+        JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo antes de enviar.");
+        return; // Detener si el archivo no está seleccionado
+    }
+
+    // Guardar el documento en la base de datos a través de la lógica de negocio
+    DocumentoLN ln = new DocumentoLN();
+    ln.agregarDocumento(documento);
+
+    // Mostrar mensaje de confirmación
+    JOptionPane.showMessageDialog(null, "Documento registrado con éxito. N° de Expediente: " + numeroExpediente);
+
+    // Limpiar el objeto y los campos después de guardar
+    documento = new DocumentosE(); // Reiniciar el objeto documento
+    limpiarCampos();
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
+     
+        JFileChooser fileChooser = new JFileChooser();
+    int result = fileChooser.showOpenDialog(this);
+
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File file = fileChooser.getSelectedFile();
+        try {
+            // Convertir el archivo en un arreglo de bytes
+            byte[] fileData = Files.readAllBytes(file.toPath());
+
+            // Asignar el archivo y el nombre del archivo en el objeto DocumentosE
+            documento.setArchivo(fileData);
+            documento.setNombreArchivo(file.getName()); // Guardar el nombre del archivo
+            
+            // Mostrar el nombre del archivo en el JLabel
+            lblNombreArchivo.setText("Archivo seleccionado: " + file.getName());
+
+            // Confirmar al usuario que el archivo fue cargado
+            JOptionPane.showMessageDialog(null, "Archivo cargado con éxito: " + file.getName() + ". Listo para enviar.");
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "No se seleccionó ningún archivo.");
+    }
+
+ 
+                                  
+    }//GEN-LAST:event_btnArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,26 +309,35 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
+    
+     private void limpiarCampos() {
+    cboDocumento.setSelectedIndex(0);
+    txtDni.setText("");
+    txtNombre.setText("");
+    txtCorreo.setText("");
+    cboTramite.setSelectedIndex(0);
+    txtFolios.setText("");
+    txtFecha.setText("");
+    txtAsunto.setText("");
+    txtDependecia.setText("");
+    txtUrl.setText("");
+    // No es necesario limpiar el archivo en `documento` aquí, ya se reinicia al crear un nuevo `DocumentosE`
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JButton btnArchivo;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JComboBox<String> cboDocumento;
+    private javax.swing.JComboBox<String> cboTipoDocumento;
+    private javax.swing.JComboBox<String> cboTramite;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -333,23 +349,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JLabel lbllogo;
+    private javax.swing.JLabel lblNombreArchivo;
+    private javax.swing.JTextField txtAsunto;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtDependecia;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtFolios;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtUrl;
     // End of variables declaration//GEN-END:variables
-
-    private void cargarLogo() {
-        Icon icon = new ImageIcon(new ImageIcon(getClass().getResource("/img/Logo.png")).getImage().
-        getScaledInstance(lbllogo.getWidth(), lbllogo.getHeight(),0));
-        lbllogo.setIcon(icon);
-    }
 }

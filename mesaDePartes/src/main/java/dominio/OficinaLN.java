@@ -4,10 +4,19 @@
  */
 package dominio;
 
+import entidad.OficinaE;
+import persistencia.OficinaDAO;
+
 /**
  *
  * @author crist
  */
-public class TramiteLN {
+public class OficinaLN {
+    
+    OficinaDAO ofi = new OficinaDAO();
+    
+    public int agregarOficina(OficinaE oficina){
+        return ofi.agregarOficina(oficina);
+    }
     
 }
