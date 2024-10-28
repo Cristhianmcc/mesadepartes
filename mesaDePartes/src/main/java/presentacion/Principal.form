@@ -59,7 +59,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="42" y="62" width="763" height="53"/>
+                  <AbsoluteConstraints x="30" y="60" width="763" height="53"/>
                 </Constraint>
               </Constraints>
 
@@ -219,7 +219,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre del Firmante:"/>
+                    <Property name="text" type="java.lang.String" value="Nombres y Apellidos:"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -408,7 +408,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="401" y="370" width="310" height="20"/>
+                      <AbsoluteConstraints x="400" y="360" width="310" height="20"/>
                     </Constraint>
                   </Constraints>
                 </Component>

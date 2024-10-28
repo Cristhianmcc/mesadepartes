@@ -23,5 +23,8 @@ public class DocumentoLN {
     public DocumentosE buscarPorDni(String dni){
         return docu.buscarPorDni(dni);
     }
+    public DocumentosE buscarPorExpediente(String expediente){
+        return docu.buscarPorExpediente(expediente);
+    }
 
 }

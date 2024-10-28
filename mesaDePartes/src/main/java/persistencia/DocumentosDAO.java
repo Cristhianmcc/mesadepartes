@@ -114,5 +114,44 @@ public DocumentosE buscarPorDni(String dni){
         }
         return documentos;
 }
+public DocumentosE buscarPorExpediente(String expediente){
+    DocumentosE documentos = null;
+        try {
+            
+            
+            sql = "Select * from documentos where numero_expediente =?";
+            cone = getConexion();
+            pst = cone.prepareStatement(sql);
+
+            pst.setString(1, expediente);
+            
+            rs = pst.executeQuery();
+            
+            if (rs.next()) {
+                documentos = new DocumentosE();
+                
+                documentos.setIddocumentos(rs.getInt("iddocumentos"));
+                documentos.setTipo_documento(rs.getString("tipo_documento"));
+                documentos.setDni(rs.getString("dni"));
+                documentos.setNombre(rs.getString("nombre"));
+                documentos.setCorreo(rs.getString("correo"));
+                documentos.setDocumento(rs.getString("documento"));
+                documentos.setTramite(rs.getString("tramite"));
+                documentos.setFolio(rs.getInt("folios"));
+                documentos.setFecha(rs.getDate("fecha"));
+                documentos.setAsunto(rs.getString("asunto"));
+                documentos.setDep_destino(rs.getString("dependencia_destino"));
+                documentos.setArchivo(rs.getBytes("archivo"));
+                documentos.setUrl(rs.getString("url"));
+                documentos.setNumero_expediente(rs.getString("numero_expediente"));
+                documentos.setNombreArchivo(rs.getString("nombre_archivo"));
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Filtrado por expediente exitoso" + ex.getMessage());
+        }
+        return documentos;
+}
+
 }
 

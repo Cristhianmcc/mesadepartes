@@ -4,15 +4,22 @@
  */
 package presentacion;
 
+import dominio.DocumentoLN;
+import entidad.DocumentosE;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author bruce
  */
 public class Expediente extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Expediente
-     */
+DocumentoLN ln = new DocumentoLN();
     public Expediente() {
         initComponents();
     }
@@ -28,15 +35,16 @@ public class Expediente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        btnBuscaExpediente = new javax.swing.JButton();
+        txtBuscaExpediente = new javax.swing.JTextField();
+        cboAreas = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        btnEnviar = new javax.swing.JButton();
+        btnArchivo = new javax.swing.JButton();
+        txtObservacion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        lblNombreArchivo = new javax.swing.JLabel();
+        lblArchivoNombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -48,64 +56,101 @@ public class Expediente extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Buscar Expediente");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 190, -1));
+        btnBuscaExpediente.setText("Buscar Expediente");
+        btnBuscaExpediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaExpedienteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscaExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, -1));
+        jPanel2.add(txtBuscaExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 220, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 190, -1));
+        cboAreas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cboAreas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 220, -1));
 
         jLabel1.setText("Áreas");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
-        jButton2.setText("Enviar");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, -1, -1));
+        btnEnviar.setText("Enviar");
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 70, -1));
 
-        jLabel3.setText("Archivo");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
-
-        jButton3.setText("jButton1");
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 190, -1));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 190, 70));
+        btnArchivo.setText("Archivo");
+        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, -1));
+        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 220, 70));
 
         jLabel4.setText("Observacion");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 440, 290));
+        lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel2.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 370, 310, 20));
+
+        lblArchivoNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel2.add(lblArchivoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 20));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 450, 320));
 
         jLabel2.setText("Expediente");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 350, 370));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 480, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 983, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscaExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaExpedienteActionPerformed
+       String expediente = txtBuscaExpediente.getText();
+    
+    // Busca el documento en la base de datos por el número de expediente
+    DocumentosE documento = ln.buscarPorExpediente(expediente); // Asegúrate de que ln es una instancia válida de DocumentoLN
+
+    if (documento != null && documento.getArchivo() != null && documento.getNombreArchivo() != null) {
+        // Mostrar el nombre del archivo en el campo de texto correspondiente
+        lblArchivoNombre.setText(documento.getNombreArchivo());
+
+        try {
+            // Obtener la ruta de la carpeta Descargas del usuario y usa el nombre original del archivo
+            String rutaDescargas = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
+            File archivoTemporal = new File(rutaDescargas);
+            
+            // Escribe el contenido del archivo (byte[]) en el archivo en Descargas
+            Files.write(archivoTemporal.toPath(), documento.getArchivo());
+            
+            // Muestra un mensaje de confirmación y la ruta del archivo
+            JOptionPane.showMessageDialog(this, "Archivo recuperado exitosamente en: " + archivoTemporal.getAbsolutePath());
+            
+            // Opción de abrir el archivo automáticamente
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas abrir el archivo?", "Archivo Recuperado", JOptionPane.YES_NO_OPTION);
+            if (opcion == JOptionPane.YES_OPTION) {
+                Desktop.getDesktop().open(archivoTemporal); // Abre el archivo usando la aplicación predeterminada del sistema
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "No se encontró el documento con el expediente ingresado o el archivo está vacío.");
+    }
+    }//GEN-LAST:event_btnBuscaExpedienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,19 +188,20 @@ public class Expediente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnArchivo;
+    private javax.swing.JButton btnBuscaExpediente;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JComboBox<String> cboAreas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblArchivoNombre;
+    private javax.swing.JLabel lblNombreArchivo;
+    private javax.swing.JTextField txtBuscaExpediente;
+    private javax.swing.JTextField txtObservacion;
     // End of variables declaration//GEN-END:variables
 }

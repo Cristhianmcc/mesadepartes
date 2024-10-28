@@ -368,25 +368,25 @@ public class UsuarioDAO extends Conexion {
            
        }      
        
-       public static void main(String[] args) {
-    UsuarioDAO p = new UsuarioDAO();
-    
-    ArrayList<Usuario> listaUsuario = p.listarUsuarios();  // Llamar al método correcto
-    if (listaUsuario != null && !listaUsuario.isEmpty()) {  // Corrección de la sintaxis
-        for (Usuario usuario : listaUsuario) {
-            System.out.println("ID: " + usuario.getId());
-            System.out.println("APELLIDOS: " + usuario.getApellidos());
-            System.out.println("NOMBRE: " + usuario.getNombres());
-            System.out.println("CORREO: " + usuario.getCorreo());
-            System.out.println("USUARIO: " + usuario.getNomusuario());
-            System.out.println("CLAVE: " + usuario.getClave());
-            System.out.println("ESTADO: " + usuario.getEstado());
-            System.out.println("-----------------------------");
-        }
-    } else {
-        System.out.println("No se encontraron datos en la base de datos");
-    }
-}
+//       public static void main(String[] args) {
+//    UsuarioDAO p = new UsuarioDAO();
+//    
+//    ArrayList<Usuario> listaUsuario = p.listarUsuarios();  // Llamar al método correcto
+//    if (listaUsuario != null && !listaUsuario.isEmpty()) {  // Corrección de la sintaxis
+//        for (Usuario usuario : listaUsuario) {
+//            System.out.println("ID: " + usuario.getId());
+//            System.out.println("APELLIDOS: " + usuario.getApellidos());
+//            System.out.println("NOMBRE: " + usuario.getNombres());
+//            System.out.println("CORREO: " + usuario.getCorreo());
+//            System.out.println("USUARIO: " + usuario.getNomusuario());
+//            System.out.println("CLAVE: " + usuario.getClave());
+//            System.out.println("ESTADO: " + usuario.getEstado());
+//            System.out.println("-----------------------------");
+//        }
+//    } else {
+//        System.out.println("No se encontraron datos en la base de datos");
+//    }
+//}
 
 }
 

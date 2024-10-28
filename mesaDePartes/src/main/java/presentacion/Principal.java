@@ -96,7 +96,7 @@ DocumentosE documento = new DocumentosE();
                 .addGap(29, 29, 29))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 62, 763, 53));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 763, 53));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,7 +125,7 @@ DocumentosE documento = new DocumentosE();
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 102, -1));
         jPanel3.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 61, 159, -1));
 
-        jLabel8.setText("Nombre del Firmante:");
+        jLabel8.setText("Nombres y Apellidos:");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 38, 132, -1));
         jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 61, 245, -1));
 
@@ -177,7 +177,7 @@ DocumentosE documento = new DocumentosE();
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 180, -1));
 
         lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 370, 310, 20));
+        jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 310, 20));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 763, 540));
 

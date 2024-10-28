@@ -58,7 +58,7 @@ public class Oficina extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 200, -1));
+        jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 240, -1));
 
         btnArchivo.setText("Archivo");
         btnArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -66,9 +66,9 @@ public class Oficina extends javax.swing.JFrame {
                 btnArchivoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 120, -1));
-        jPanel2.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 200, -1));
-        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 200, 80));
+        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 90, -1));
+        jPanel2.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 140, -1));
+        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 240, 80));
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +76,7 @@ public class Oficina extends javax.swing.JFrame {
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, -1, -1));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 80, -1));
 
         btnBuscaDni.setText("Buscar DNI");
         btnBuscaDni.addActionListener(new java.awt.event.ActionListener() {
@@ -89,31 +89,31 @@ public class Oficina extends javax.swing.JFrame {
         jLabel1.setText("Correo");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 80, -1));
 
-        lblNombreArchivo.setText("Archivo");
-        jPanel2.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 200, -1));
+        lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel2.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 240, 20));
 
         jLabel3.setText("Observacion");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 80, -1));
 
         jLabel4.setText("Fecha");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 90, -1));
-        jPanel2.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 190, -1));
+        jPanel2.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 130, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(40, 40, 40)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,6 +146,7 @@ public class Oficina extends javax.swing.JFrame {
     ln.agregarOficina(oficina);
     JOptionPane.showMessageDialog(null,"Enviado con Exito");
     
+    limpiarCampos();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
@@ -191,7 +192,7 @@ public class Oficina extends javax.swing.JFrame {
     if (documento != null && documento.getArchivo() != null && documento.getNombreArchivo() != null) {
         // Establecer el correo en el campo de texto
         txtCorreo.setText(documento.getCorreo()); // Muestra el correo recuperado
-
+        lblNombreArchivo.setText(documento.getNombreArchivo());
         try {
             // Obtener la ruta de la carpeta Descargas del usuario y usa el nombre original del archivo
             String rutaDescargas = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
@@ -212,13 +213,20 @@ public class Oficina extends javax.swing.JFrame {
             Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
         }
     } else {
-        JOptionPane.showMessageDialog(this, "No se encontró el documento con el DNI ingresado o el archivo está vacío.");
+        JOptionPane.showMessageDialog(this, "No se encontró el documento con el dni ingresado o el archivo está vacío.");
     }
     }//GEN-LAST:event_btnBuscaDniActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
+    public void limpiarCampos(){
+    txtDni.setText("");
+    txtCorreo.setText("");
+    lblNombreArchivo.setText("");
+    txtObservacion.setText("");
+    txtFecha.setText("");
+    
+}
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
