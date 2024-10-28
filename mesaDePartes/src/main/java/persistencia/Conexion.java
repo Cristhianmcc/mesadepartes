@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  * @author crist
  */
 public class Conexion {
-   private String url = "jdbc:mysql://localhost:3306/mesas";
-   private String usr = "root";
-   private String pass = "root";
+   private String url = "jdbc:mysql://www.db4free.net:3306/db_lurin";
+   private String usr = "lurin_iv";
+   private String pass = "Lurin2023";
    
    Connection conn = null;
    
