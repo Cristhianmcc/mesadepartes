@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import servicios.EmailService;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Oficina extends javax.swing.JFrame {
     
     OficinaE oficina = new OficinaE();
     DocumentoLN ln = new DocumentoLN();
+    DocumentosE documento = new DocumentosE();
     
     public Oficina() {
         initComponents();
@@ -146,6 +148,17 @@ public class Oficina extends javax.swing.JFrame {
     ln.agregarOficina(oficina);
     JOptionPane.showMessageDialog(null,"Enviado con Exito");
     
+     String correoDestinatario = oficina.getCorreo(); // Correo del estudiante o usuario
+    String asunto = "Documento recibido - Expediente: " + documento.getNumero_expediente();
+    String mensaje = "Estimado/a " + documento.getNombre() + ",\n\nSe ha recibido el documento solicitado.\n\nSaludos cordiales.";
+
+    // Ruta del archivo que se guardó en Descargas o en la carpeta temporal
+    File archivoAdjunto = new File(System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo());
+
+    EmailService emailService = new EmailService();
+    emailService.enviarCorreoConAdjunto(correoDestinatario, asunto, mensaje, archivoAdjunto);
+
+    
     limpiarCampos();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -178,7 +191,7 @@ public class Oficina extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "No se seleccionó ningún archivo.");
     }
 
- 
+    
                                   
                                            
     }//GEN-LAST:event_btnArchivoActionPerformed
