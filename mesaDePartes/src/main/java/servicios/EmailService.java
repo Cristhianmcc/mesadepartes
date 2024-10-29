@@ -23,8 +23,8 @@ import java.util.Properties;
  */
 public class EmailService {
 
-    private final String remitenteCorreo = "74625021@iestplurin.edu.pe"; // Cambia a tu correo
-    private final String remitenteContraseña = "dsxmpalfedelsvwo"; // Cambia a la contraseña de tu correo
+    private final String remitenteCorreo = "institutopublicolurin01@gmail.com"; // Cambia a tu correo
+    private final String remitenteContraseña = "xdjrtrzgiyrjuwzx"; // Cambia a la contraseña de tu correo
 
     public void enviarCorreoConAdjunto(String destinatarioCorreo, String asunto, String mensaje, File archivoAdjunto) {
          if (archivoAdjunto == null || !archivoAdjunto.exists()) {

@@ -9,6 +9,8 @@ import entidad.DocumentosE;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import persistencia.DocumentosDAO;
@@ -21,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
 DocumentosE documento = new DocumentosE();
     public Principal() {
         initComponents();
+        initFechaActual();
         setLocationRelativeTo(null);
     }
 
@@ -44,7 +47,6 @@ DocumentosE documento = new DocumentosE();
         txtFolios = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -65,7 +67,11 @@ DocumentosE documento = new DocumentosE();
         txtCorreo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         lblNombreArchivo = new javax.swing.JLabel();
+        lblfecha = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 153));
@@ -115,21 +121,20 @@ DocumentosE documento = new DocumentosE();
         jPanel3.add(txtFolios, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 123, -1));
 
         jLabel5.setText("N° Folios:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 74, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 74, -1));
 
         jLabel6.setText("Fecha:");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 41, -1));
-        jPanel3.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, -1));
 
         jLabel7.setText("Dni del Firmante:");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 102, -1));
-        jPanel3.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 61, 159, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 102, -1));
+        jPanel3.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 159, -1));
 
         jLabel8.setText("Nombres y Apellidos:");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 38, 132, -1));
-        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 61, 245, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 132, -1));
+        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 245, -1));
 
-        jLabel16.setText("Asunto (tal y como está consignado en sudocumento)* :");
+        jLabel16.setText("Asunto (tal y como está consignado en su documento)* :");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 313, -1));
         jPanel3.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 660, 80));
 
@@ -157,7 +162,7 @@ DocumentosE documento = new DocumentosE();
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 91, 38));
+        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 91, 38));
 
         cboDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel3.add(cboDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 170, -1));
@@ -179,14 +184,31 @@ DocumentosE documento = new DocumentosE();
         lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 310, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 763, 540));
+        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel3.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, 20));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 763, 540));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel2.setText("MIS TRAMITES");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 50));
+        jLabel2.setText("NUEVO TRAMITE");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, 50));
 
         jScrollPane1.setViewportView(jPanel1);
+
+        jMenu3.setText("Menú");
+
+        jMenuItem1.setText("Tramites");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,7 +237,7 @@ DocumentosE documento = new DocumentosE();
     documento.setDocumento(cboDocumento.getSelectedItem().toString());
     documento.setTramite(cboTramite.getSelectedItem().toString());
     documento.setFolio(Integer.parseInt(txtFolios.getText()));
-    documento.setFecha(java.sql.Date.valueOf(txtFecha.getText())); // Asegúrate del formato
+    documento.setFecha(java.sql.Date.valueOf(lblfecha.getText())); // Asegúrate del formato
     documento.setAsunto(txtAsunto.getText());
     documento.setDep_destino(txtDependecia.getText());
     documento.setUrl(txtUrl.getText());
@@ -275,6 +297,12 @@ DocumentosE documento = new DocumentosE();
                                   
     }//GEN-LAST:event_btnArchivoActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        EditarTramites form = new EditarTramites();
+        form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -317,7 +345,6 @@ DocumentosE documento = new DocumentosE();
     txtCorreo.setText("");
     cboTramite.setSelectedIndex(0);
     txtFolios.setText("");
-    txtFecha.setText("");
     txtAsunto.setText("");
     txtDependecia.setText("");
     txtUrl.setText("");
@@ -345,18 +372,30 @@ DocumentosE documento = new DocumentosE();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombreArchivo;
+    private javax.swing.JLabel lblfecha;
     private javax.swing.JTextField txtAsunto;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDependecia;
     private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtFolios;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtUrl;
     // End of variables declaration//GEN-END:variables
+
+    private void initFechaActual() {
+            // Define el formato de la fecha
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+    // Obtiene la fecha actual
+    String fechaActual = formatoFecha.format(new Date());
+    // Muestra la fecha en el campo de fecha (por ejemplo, txtFecha)
+    lblfecha.setText(fechaActual);
+    }
 }

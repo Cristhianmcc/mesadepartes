@@ -18,35 +18,59 @@ import javax.swing.JOptionPane;
  *
  * @author crist
  */
-public class OficinaDAO extends Conexion{
+public class OficinaDAO extends Conexion {
+
     private String sql;
     Connection cone;
     PreparedStatement pst;
     ResultSet rs;
     Statement st;
-    
-    
-    public int agregarOficina(OficinaE oficina){
-        
+
+    public int agregarOficina(OficinaE oficina) {
+
         try {
-            sql = "Insert into oficinas (dni,correo,archivo,observacion,fecha) values (?,?,?,?,?)";
+            sql = "Insert into oficinas (dni,numexp,nombre,correo,archivo,observacion,fecha) values (?,?,?,?,?,?,?)";
             cone = getConexion();
             pst = cone.prepareStatement(sql);
-            
-            pst.setString(1,oficina.getDni());
-            pst.setString(2,oficina.getCorreo());
-            pst.setBytes(3, oficina.getArchivo());
-            pst.setString(4, oficina.getObservacion());
-            pst.setDate(5, oficina.getFecha());
-            
+
+            pst.setString(1, oficina.getDni());
+            pst.setString(2,oficina.getNumexp());
+            pst.setString(3,oficina.getNombre());
+            pst.setString(4, oficina.getCorreo());
+            pst.setBytes(5, oficina.getArchivo());
+            pst.setString(6, oficina.getObservacion());
+            pst.setDate(7, oficina.getFecha());
+
             return pst.executeUpdate();
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"oficina grabada con exito" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "oficina grabada con exito" + ex.getMessage());
         }
-        
+
         return 0;
-}
-}
+    }
+    
+    
+    public int editaOficina(OficinaE oficina){
+    
+        try {
+            sql = "Update oficinas set correo=? where dni=?";
+            cone = getConexion();
+            pst = cone.prepareStatement(sql);
+
+            pst.setString(1, oficina.getCorreo());
 
 
+
+            return pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "oficina actualizada con exito" + ex.getMessage());
+        }
+
+        return 0;
+        
+    }
+    
+    
+}

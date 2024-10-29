@@ -17,6 +17,8 @@ public class OficinaE {
     private byte[] archivo;
     private String observacion;
     private Date fecha;
+    private String numexp;
+    private String Nombre;
 
     public int getIdoficina() {
         return idoficina;
@@ -64,6 +66,22 @@ public class OficinaE {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getNumexp() {
+        return numexp;
+    }
+
+    public void setNumexp(String numexp) {
+        this.numexp = numexp;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
     
 }

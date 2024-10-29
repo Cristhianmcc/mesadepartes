@@ -12,6 +12,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -30,6 +32,7 @@ public class Oficina extends javax.swing.JFrame {
 
     public Oficina() {
         initComponents();
+        initFechaActual();
     }
 
     /**
@@ -53,14 +56,20 @@ public class Oficina extends javax.swing.JFrame {
         lblNombreArchivo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
+        btnActualizar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtnumexp = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        lblfecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 240, -1));
+        jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 240, -1));
 
         btnArchivo.setText("Archivo");
         btnArchivo.addActionListener(new java.awt.event.ActionListener() {
@@ -68,9 +77,9 @@ public class Oficina extends javax.swing.JFrame {
                 btnArchivoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 90, -1));
+        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 90, -1));
         jPanel2.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 140, -1));
-        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 240, 80));
+        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 240, 80));
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +87,7 @@ public class Oficina extends javax.swing.JFrame {
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 80, -1));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 80, -1));
 
         btnBuscaDni.setText("Buscar DNI");
         btnBuscaDni.addActionListener(new java.awt.event.ActionListener() {
@@ -89,33 +98,59 @@ public class Oficina extends javax.swing.JFrame {
         jPanel2.add(btnBuscaDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, -1));
 
         jLabel1.setText("Correo");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 80, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 80, -1));
 
         lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel2.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 240, 20));
+        jPanel2.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 240, 20));
 
         jLabel3.setText("Observacion");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 80, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 80, -1));
 
         jLabel4.setText("Fecha");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 90, -1));
-        jPanel2.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 130, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 90, -1));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, -1, -1));
+
+        jLabel2.setText("Num. Expediente");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+
+        jLabel5.setText("Nombre");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel2.add(txtnumexp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 140, -1));
+        jPanel2.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 240, -1));
+
+        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel2.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 110, 20));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,9 +171,11 @@ public class Oficina extends javax.swing.JFrame {
 
         // Guardar la información de oficina
         oficina.setDni(txtDni.getText());
+        oficina.setNumexp(txtnumexp.getText());
+        oficina.setNombre(txtnombre.getText());
         oficina.setCorreo(txtCorreo.getText());
         oficina.setObservacion(txtObservacion.getText());
-        oficina.setFecha(java.sql.Date.valueOf(txtFecha.getText()));
+        oficina.setFecha(java.sql.Date.valueOf(lblfecha.getText()));
 
         // Verificar si el archivo fue seleccionado
         if (oficina.getArchivo() == null) {
@@ -153,8 +190,8 @@ public class Oficina extends javax.swing.JFrame {
 
         // Preparación del correo
         String destinatario = oficina.getCorreo(); // Correo del estudiante o usuario
-        String asunto = "Documento recibido - Expediente: " + documento.getNumero_expediente();
-        String mensaje = "Estimado/a " + documento.getNombre() + ",\n\nSe ha recibido el documento solicitado.\n\nSaludos cordiales.";
+        String asunto = "Documento recibido - Expediente: " + oficina.getNumexp();
+        String mensaje = "Estimado/a " + oficina.getNombre() + ",\n\nSe ha enviado el documento solicitado.\n\nSaludos cordiales.";
 
         // Ruta del archivo que se guardó en Descargas o en la carpeta temporal
         String rutaArchivo = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
@@ -216,6 +253,8 @@ JFileChooser fileChooser = new JFileChooser();
         DocumentosE documento = ln.buscarPorDni(dni); // Asegúrate de que ln es una instancia válida de DocumentoLN
 
         if (documento != null && documento.getArchivo() != null && documento.getNombreArchivo() != null) {
+            txtnumexp.setText(documento.getNumero_expediente());
+            txtnombre.setText(documento.getNombre());
             // Establecer el correo en el campo de texto
             txtCorreo.setText(documento.getCorreo()); // Muestra el correo recuperado
             lblNombreArchivo.setText(documento.getNombreArchivo());
@@ -243,12 +282,38 @@ JFileChooser fileChooser = new JFileChooser();
         }
     }//GEN-LAST:event_btnBuscaDniActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        oficina.setDni(txtDni.getText());
+        oficina.setCorreo(txtCorreo.getText());
+
+        
+
+
+        // Guardar la información en la base de datos
+        OficinaLN ln = new OficinaLN();
+        ln.agregarOficina(oficina);
+        JOptionPane.showMessageDialog(null, "Información de la oficina actualizada con éxito.");
+        
+        // Limpiar los campos después de enviar
+        limpiarCampos();
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        Principal form= new Principal();
+        form.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     public void limpiarCampos() {
         txtDni.setText("");
+        txtnumexp.setText("");
+        txtnombre.setText("");
         txtCorreo.setText("");
         lblNombreArchivo.setText("");
         txtObservacion.setText("");
-        txtFecha.setText("");
 
     }
 
@@ -285,18 +350,33 @@ JFileChooser fileChooser = new JFileChooser();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnArchivo;
     private javax.swing.JButton btnBuscaDni;
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblNombreArchivo;
+    private javax.swing.JLabel lblfecha;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtObservacion;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtnumexp;
     // End of variables declaration//GEN-END:variables
+
+    private void initFechaActual() {
+        // Define el formato de la fecha
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+    // Obtiene la fecha actual
+    String fechaActual = formatoFecha.format(new Date());
+    // Muestra la fecha en el campo de fecha (por ejemplo, txtFecha)
+    lblfecha.setText(fechaActual);
+    }
 }

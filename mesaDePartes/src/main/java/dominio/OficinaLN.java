@@ -14,9 +14,11 @@ import persistencia.OficinaDAO;
 public class OficinaLN {
     
     OficinaDAO ofi = new OficinaDAO();
-    
+ 
     public int agregarOficina(OficinaE oficina){
         return ofi.agregarOficina(oficina);
     }
-    
+    public int editaOficina(OficinaE oficina){
+        return ofi.editaOficina(oficina);
+    }
 }

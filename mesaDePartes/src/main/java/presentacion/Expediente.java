@@ -45,6 +45,7 @@ DocumentoLN ln = new DocumentoLN();
         jLabel4 = new javax.swing.JLabel();
         lblNombreArchivo = new javax.swing.JLabel();
         lblArchivoNombre = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -72,7 +73,7 @@ DocumentoLN ln = new DocumentoLN();
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
 
         btnEnviar.setText("Enviar");
-        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 70, -1));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 70, -1));
 
         btnArchivo.setText("Archivo");
         jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, -1));
@@ -86,6 +87,9 @@ DocumentoLN ln = new DocumentoLN();
 
         lblArchivoNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel2.add(lblArchivoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 20));
+
+        jButton1.setText("jButton1");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 450, 320));
 
@@ -192,6 +196,7 @@ DocumentoLN ln = new DocumentoLN();
     private javax.swing.JButton btnBuscaExpediente;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JComboBox<String> cboAreas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
