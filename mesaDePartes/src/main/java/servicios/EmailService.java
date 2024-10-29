@@ -23,10 +23,15 @@ import java.util.Properties;
  */
 public class EmailService {
 
-    private final String remitenteCorreo = "copilote001@gmail.com"; // Cambia a tu correo
-    private final String remitenteContraseña = ""; // Cambia a la contraseña de tu correo
+    private final String remitenteCorreo = "74625021@iestplurin.edu.pe"; // Cambia a tu correo
+    private final String remitenteContraseña = "dsxmpalfedelsvwo"; // Cambia a la contraseña de tu correo
 
     public void enviarCorreoConAdjunto(String destinatarioCorreo, String asunto, String mensaje, File archivoAdjunto) {
+         if (archivoAdjunto == null || !archivoAdjunto.exists()) {
+            System.err.println("Error: Archivo adjunto no encontrado o es nulo.");
+            return;
+        }
+
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -46,24 +51,19 @@ public class EmailService {
             correo.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatarioCorreo));
             correo.setSubject(asunto);
 
-            // Cuerpo del correo
             MimeBodyPart mensajeCuerpo = new MimeBodyPart();
             mensajeCuerpo.setText(mensaje);
 
-            // Adjuntar el archivo
             MimeBodyPart adjunto = new MimeBodyPart();
             adjunto.attachFile(archivoAdjunto);
 
-            // Combina cuerpo y adjunto
             Multipart multiparte = new MimeMultipart();
             multiparte.addBodyPart(mensajeCuerpo);
             multiparte.addBodyPart(adjunto);
 
             correo.setContent(multiparte);
 
-            // Enviar el correo
             Transport.send(correo);
-
             System.out.println("Correo enviado exitosamente a " + destinatarioCorreo);
         } catch (Exception e) {
             e.printStackTrace();

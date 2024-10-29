@@ -23,11 +23,11 @@ import servicios.EmailService;
  * @author bruce
  */
 public class Oficina extends javax.swing.JFrame {
-    
+
     OficinaE oficina = new OficinaE();
     DocumentoLN ln = new DocumentoLN();
     DocumentosE documento = new DocumentosE();
-    
+
     public Oficina() {
         initComponents();
     }
@@ -133,38 +133,54 @@ public class Oficina extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-       
+
+        // Guardar la información de oficina
         oficina.setDni(txtDni.getText());
         oficina.setCorreo(txtCorreo.getText());
         oficina.setObservacion(txtObservacion.getText());
         oficina.setFecha(java.sql.Date.valueOf(txtFecha.getText()));
-        
-         // Verificar si el archivo fue seleccionado
-    if (oficina.getArchivo() == null) {
-        JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo antes de enviar.");
-        return; // Detener si el archivo no está seleccionado
-    }
-    OficinaLN ln = new OficinaLN();
-    ln.agregarOficina(oficina);
-    JOptionPane.showMessageDialog(null,"Enviado con Exito");
-    
-     String correoDestinatario = oficina.getCorreo(); // Correo del estudiante o usuario
-    String asunto = "Documento recibido - Expediente: " + documento.getNumero_expediente();
-    String mensaje = "Estimado/a " + documento.getNombre() + ",\n\nSe ha recibido el documento solicitado.\n\nSaludos cordiales.";
 
-    // Ruta del archivo que se guardó en Descargas o en la carpeta temporal
-    File archivoAdjunto = new File(System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo());
+        // Verificar si el archivo fue seleccionado
+        if (oficina.getArchivo() == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo antes de enviar.");
+            return;
+        }
 
-    EmailService emailService = new EmailService();
-    emailService.enviarCorreoConAdjunto(correoDestinatario, asunto, mensaje, archivoAdjunto);
+        // Guardar la información en la base de datos
+        OficinaLN ln = new OficinaLN();
+        ln.agregarOficina(oficina);
+        JOptionPane.showMessageDialog(null, "Información de la oficina guardada con éxito.");
 
-    
-    limpiarCampos();
+        // Preparación del correo
+        String destinatario = oficina.getCorreo(); // Correo del estudiante o usuario
+        String asunto = "Documento recibido - Expediente: " + documento.getNumero_expediente();
+        String mensaje = "Estimado/a " + documento.getNombre() + ",\n\nSe ha recibido el documento solicitado.\n\nSaludos cordiales.";
+
+        // Ruta del archivo que se guardó en Descargas o en la carpeta temporal
+        String rutaArchivo = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
+        System.out.println("Ruta del archivo adjunto: " + rutaArchivo); // Verificar la ruta en la consola
+
+        File archivoAdjunto = new File(rutaArchivo);
+
+        // Verificar si el archivo adjunto realmente existe
+        if (!archivoAdjunto.exists()) {
+            JOptionPane.showMessageDialog(this, "El archivo adjunto no se encontró en la ruta especificada: " + rutaArchivo);
+            return;
+        }
+
+        // Instancia de EmailService y envío de correo
+        EmailService emailService = new EmailService();
+        emailService.enviarCorreoConAdjunto(destinatario, asunto, mensaje, archivoAdjunto);
+
+        JOptionPane.showMessageDialog(this, "Documento enviado a " + destinatario);
+
+        // Limpiar los campos después de enviar
+        limpiarCampos();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
-        
-        JFileChooser fileChooser = new JFileChooser();
+
+JFileChooser fileChooser = new JFileChooser();
     int result = fileChooser.showOpenDialog(this);
 
     if (result == JFileChooser.APPROVE_OPTION) {
@@ -173,16 +189,15 @@ public class Oficina extends javax.swing.JFrame {
             // Convertir el archivo en un arreglo de bytes
             byte[] fileData = Files.readAllBytes(file.toPath());
 
-            // Asignar el archivo en el objeto DocumentosE existente
+            // Asignar el archivo y el nombre en el objeto `oficina`
             oficina.setArchivo(fileData);
-            
+            documento.setNombreArchivo(file.getName()); // Aquí se guarda el nombre del archivo
+
             lblNombreArchivo.setText("Archivo seleccionado: " + file.getName());
 
             // Confirmar al usuario que el archivo fue cargado
             JOptionPane.showMessageDialog(null, "Archivo cargado con éxito: " + file.getName() + ". Listo para enviar.");
 
-            
-            
         } catch (IOException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al leer el archivo.");
@@ -191,55 +206,52 @@ public class Oficina extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "No se seleccionó ningún archivo.");
     }
 
-    
-                                  
-                                           
+
     }//GEN-LAST:event_btnArchivoActionPerformed
 
     private void btnBuscaDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaDniActionPerformed
-      String dni = txtDni.getText();
+        String dni = txtDni.getText();
 
-    // Busca el documento en la base de datos por DNI
-    DocumentosE documento = ln.buscarPorDni(dni); // Asegúrate de que ln es una instancia válida de DocumentoLN
+        // Busca el documento en la base de datos por DNI
+        DocumentosE documento = ln.buscarPorDni(dni); // Asegúrate de que ln es una instancia válida de DocumentoLN
 
-    if (documento != null && documento.getArchivo() != null && documento.getNombreArchivo() != null) {
-        // Establecer el correo en el campo de texto
-        txtCorreo.setText(documento.getCorreo()); // Muestra el correo recuperado
-        lblNombreArchivo.setText(documento.getNombreArchivo());
-        try {
-            // Obtener la ruta de la carpeta Descargas del usuario y usa el nombre original del archivo
-            String rutaDescargas = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
-            File archivoTemporal = new File(rutaDescargas);
-            
-            // Escribe el contenido del archivo (byte[]) en el archivo en Descargas
-            Files.write(archivoTemporal.toPath(), documento.getArchivo());
-            
-            // Muestra un mensaje de confirmación y la ruta del archivo
-            JOptionPane.showMessageDialog(this, "Archivo recuperado exitosamente en: " + archivoTemporal.getAbsolutePath());
-            
-            // Opción de abrir el archivo automáticamente
-            int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas abrir el archivo?", "Archivo Recuperado", JOptionPane.YES_NO_OPTION);
-            if (opcion == JOptionPane.YES_OPTION) {
-                Desktop.getDesktop().open(archivoTemporal); // Abre el archivo usando la aplicación predeterminada del sistema
+        if (documento != null && documento.getArchivo() != null && documento.getNombreArchivo() != null) {
+            // Establecer el correo en el campo de texto
+            txtCorreo.setText(documento.getCorreo()); // Muestra el correo recuperado
+            lblNombreArchivo.setText(documento.getNombreArchivo());
+            try {
+                // Obtener la ruta de la carpeta Descargas del usuario y usa el nombre original del archivo
+                String rutaDescargas = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
+                File archivoTemporal = new File(rutaDescargas);
+
+                // Escribe el contenido del archivo (byte[]) en el archivo en Descargas
+                Files.write(archivoTemporal.toPath(), documento.getArchivo());
+
+                // Muestra un mensaje de confirmación y la ruta del archivo
+                JOptionPane.showMessageDialog(this, "Archivo recuperado exitosamente en: " + archivoTemporal.getAbsolutePath());
+
+                // Opción de abrir el archivo automáticamente
+                int opcion = JOptionPane.showConfirmDialog(this, "¿Deseas abrir el archivo?", "Archivo Recuperado", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    Desktop.getDesktop().open(archivoTemporal); // Abre el archivo usando la aplicación predeterminada del sistema
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró el documento con el dni ingresado o el archivo está vacío.");
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "No se encontró el documento con el dni ingresado o el archivo está vacío.");
-    }
     }//GEN-LAST:event_btnBuscaDniActionPerformed
 
-   
-    public void limpiarCampos(){
-    txtDni.setText("");
-    txtCorreo.setText("");
-    lblNombreArchivo.setText("");
-    txtObservacion.setText("");
-    txtFecha.setText("");
-    
-}
-    
+    public void limpiarCampos() {
+        txtDni.setText("");
+        txtCorreo.setText("");
+        lblNombreArchivo.setText("");
+        txtObservacion.setText("");
+        txtFecha.setText("");
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
