@@ -8,17 +8,16 @@ package entidad;
  *
  * @author crist
  */
-public class Usuario {
+public class UsuarioE {
     
     private int id;
-    private int dni;
+    private String dni;
     private String apellidos;
     private String nombres;
     private String correo;
     private String nomusuario;
     private String clave;
-    private String estado;
-    private String fecha;
+    private String cargo;
 
     public int getId() {
         return id;
@@ -27,6 +26,8 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
+
+   
 
     public String getApellidos() {
         return apellidos;
@@ -68,29 +69,21 @@ public class Usuario {
         this.clave = clave;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
-
-  
 }
+
+    
