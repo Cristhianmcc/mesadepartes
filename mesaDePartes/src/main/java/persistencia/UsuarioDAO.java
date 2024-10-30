@@ -71,27 +71,37 @@ public class UsuarioDAO extends Conexion {
 //        }
     //todo esto comentado se hizo para poder probar si estaba bien la lectura de usuario y clave
         public int agregaUsuario(UsuarioE usuario){
+         int resultado = 0; // Para almacenar el resultado de la inserción
         try {
-            sql = "insert into usuarios (dni,nombre,apellido,correo,nomusuario,clave,cargo) values (?,?,?,?,?,?,?)";
+            sql = "INSERT INTO usuarios (dni, nombre, apellido, correo, nomusuario, clave, cargo) VALUES (?, ?, ?, ?, ?, ?, ?)";
             cone = getConexion();
-            
+
             pst = cone.prepareStatement(sql);
             
+            // Establece los parámetros para la consulta
             pst.setString(1, usuario.getDni());
-            pst.setString(2,usuario.getApellidos());
-            pst.setString(3,usuario.getNombres());
-            pst.setString(4,usuario.getCorreo());
-            pst.setString(5,usuario.getNomusuario());
-            pst.setString(6,usuario.getClave());
+            pst.setString(2, usuario.getNombres());
+            pst.setString(3, usuario.getApellidos());
+            pst.setString(4, usuario.getCorreo());
+            pst.setString(5, usuario.getNomusuario());
+            pst.setString(6, usuario.getClave());
             pst.setString(7, usuario.getCargo());
-           
-            
-            return pst.executeUpdate();
-   
+
+            // Ejecuta la inserción
+            resultado = pst.executeUpdate();
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error en insertar usuario" +ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al insertar usuario: " + ex.getMessage());
+        } finally {
+            // Cierra recursos
+            try {
+                if (pst != null) pst.close();
+                if (cone != null) cone.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar recursos: " + ex.getMessage());
+            }
         }
-           return 0; 
+        return resultado; // Devuelve e
 //    }
 //        public static void main(String[] args) {
 //        UsuarioDAO db = new UsuarioDAO();
