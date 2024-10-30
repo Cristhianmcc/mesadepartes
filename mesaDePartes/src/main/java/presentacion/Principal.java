@@ -59,7 +59,6 @@ DocumentosE documento = new DocumentosE();
         jLabel19 = new javax.swing.JLabel();
         txtUrl = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-        cboDocumento = new javax.swing.JComboBox<>();
         txtDependecia = new javax.swing.JTextField();
         cboTramite = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
@@ -68,15 +67,14 @@ DocumentosE documento = new DocumentosE();
         jLabel10 = new javax.swing.JLabel();
         lblNombreArchivo = new javax.swing.JLabel();
         lblfecha = new javax.swing.JLabel();
+        cboDocumento = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 153));
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -113,100 +111,134 @@ DocumentosE documento = new DocumentosE();
         jLabel3.setText("Tipo de Documento:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        cboTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Item 2", "Item 3", "Item 4", "em 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cboTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 61, 210, -1));
+        cboTipoDocumento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cboTipoDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "DNI", "Carnet De Extranjeria" }));
+        cboTipoDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTipoDocumentoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cboTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 61, 200, -1));
 
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("Documento:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 91, -1));
+
+        txtFolios.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel3.add(txtFolios, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 123, -1));
 
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel5.setText("N° Folios:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 74, -1));
 
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel6.setText("Fecha:");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, 41, -1));
 
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel7.setText("Dni del Firmante:");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, 102, -1));
+
+        txtDni.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 159, -1));
 
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel8.setText("Nombres y Apellidos:");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 132, -1));
+
+        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 245, -1));
 
-        jLabel16.setText("Asunto (tal y como está consignado en su documento)* :");
-        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 313, -1));
-        jPanel3.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 660, 80));
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel16.setText("Asunto (tal y como está consignado en su documento):");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 330, -1));
 
-        jLabel17.setText("Dependencia(s) Destino(s)*");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 173, -1));
+        txtAsunto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jPanel3.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 660, 80));
 
-        jLabel18.setText("Archivo (PDF máx 5 MB)* :");
+        jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel17.setText("Dependencia(s) Destino(s):");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 180, -1));
+
+        jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel18.setText("Archivo (PDF máx 5 MB):");
         jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 159, -1));
 
+        btnArchivo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnArchivo.setText("Seleccionar archivo |  Ningún archivo seleccionado");
         btnArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnArchivoActionPerformed(evt);
             }
         });
-        jPanel3.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, 293, -1));
+        jPanel3.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 350, -1));
 
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel19.setText("URL del Anexo (leer indicaciones):");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 197, -1));
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 200, -1));
+
+        txtUrl.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel3.add(txtUrl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 307, -1));
 
+        btnEnviar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 91, 38));
+        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 91, 38));
 
-        cboDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(cboDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 170, -1));
-
+        txtDependecia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDependecia.setText("El Director");
         jPanel3.add(txtDependecia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 250, -1));
 
-        cboTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTramite.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cboTramite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Reingreso Por Repitencia", "Cambio De Turno", "Licencia De Estudios", "Record De Notas", "Certificado Modular", "Reingreso", "Costancia De Estudios", "Certificado De Estudios", "Otros" }));
         jPanel3.add(cboTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 180, -1));
 
-        jLabel20.setText("Trámite");
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel20.setText("Trámite:");
         jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, -1));
 
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel9.setText("Correo Electronico: ");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        txtCorreo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel3.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 230, -1));
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 180, -1));
 
+        lblNombreArchivo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 310, 20));
+        jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 350, 20));
 
-        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblfecha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 763, 540));
+        cboDocumento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cboDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Solicitud", "Otros" }));
+        jPanel3.add(cboDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 170, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 763, 550));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 51));
         jLabel2.setText("NUEVO TRAMITE");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, 50));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, 40));
 
         jScrollPane1.setViewportView(jPanel1);
-
-        jMenu3.setText("Menú");
-
-        jMenuItem1.setText("Tramites");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -214,14 +246,15 @@ DocumentosE documento = new DocumentosE();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private String generarNumeroExpediente() {
@@ -297,11 +330,29 @@ DocumentosE documento = new DocumentosE();
                                   
     }//GEN-LAST:event_btnArchivoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        EditarTramites form = new EditarTramites();
-        form.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        int swe = evt.getKeyChar();
+        boolean letra = Character.isLetter(swe);
+        boolean espacio = Character.isWhitespace(swe);
+        if (!letra && !espacio) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
+        int swe = evt.getKeyChar();
+        boolean numero = swe >= 48 && swe <= 57;
+        if (!numero) {
+            evt.consume();
+        }
+        if (txtDni.getText().length() >= 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniKeyTyped
+
+    private void cboTipoDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoDocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTipoDocumentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,7 +397,6 @@ DocumentosE documento = new DocumentosE();
     cboTramite.setSelectedIndex(0);
     txtFolios.setText("");
     txtAsunto.setText("");
-    txtDependecia.setText("");
     txtUrl.setText("");
     // No es necesario limpiar el archivo en `documento` aquí, ya se reinicia al crear un nuevo `DocumentosE`
 }
@@ -372,9 +422,7 @@ DocumentosE documento = new DocumentosE();
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

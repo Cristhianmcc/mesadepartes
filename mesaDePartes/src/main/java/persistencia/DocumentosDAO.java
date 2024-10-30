@@ -81,22 +81,15 @@ public class DocumentosDAO extends Conexion {
 }
  
 public DocumentosE buscarPorDni(String dni){
-    
         DocumentosE documentos = null;
         try {
-            
-            
-            sql = "Select * from documentos where dni =?";
+            sql = "Select * from documentos where dni = ?";
             cone = getConexion();
             pst = cone.prepareStatement(sql);
-
             pst.setString(1, dni);
-            
             rs = pst.executeQuery();
-            
             if (rs.next()) {
                 documentos = new DocumentosE();
-                
                 documentos.setIddocumentos(rs.getInt("iddocumentos"));
                 documentos.setTipo_documento(rs.getString("tipo_documento"));
                 documentos.setDni(rs.getString("dni"));
@@ -113,7 +106,6 @@ public DocumentosE buscarPorDni(String dni){
                 documentos.setNumero_expediente(rs.getString("numero_expediente"));
                 documentos.setNombreArchivo(rs.getString("nombre_archivo"));
             }
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Filtrado por dni exitoso" + ex.getMessage());
         }

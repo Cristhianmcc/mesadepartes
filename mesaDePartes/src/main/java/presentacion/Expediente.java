@@ -78,59 +78,71 @@ public class Expediente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnBuscaExpediente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnBuscaExpediente.setText("Buscar Expediente");
         btnBuscaExpediente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscaExpedienteActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBuscaExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, -1));
+        jPanel2.add(btnBuscaExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 140, -1));
+
+        txtBuscaExpediente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jPanel2.add(txtBuscaExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 220, -1));
 
-        cboAreas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cboAreas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 220, -1));
+        cboAreas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cboAreas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Secretaria Académica", "Unidad Académica", "Tesoreria", "Otros", " " }));
+        jPanel2.add(cboAreas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 220, -1));
 
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setText("Áreas");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
+        btnEnviar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 70, -1));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 70, -1));
 
+        btnArchivo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnArchivo.setText("Archivo");
         btnArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnArchivoActionPerformed(evt);
             }
         });
-        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 110, -1));
-        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 220, 70));
+        jPanel2.add(btnArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 110, -1));
 
-        jLabel4.setText("Observacion");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
+        txtObservacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jPanel2.add(txtObservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 220, 70));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel4.setText("Observación");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, -1));
 
         lblNombreArchivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel2.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(401, 370, 310, 20));
 
+        lblArchivoNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblArchivoNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel2.add(lblArchivoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 20));
+        jPanel2.add(lblArchivoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 220, 20));
 
         jButton1.setText("jButton1");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 450, 320));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 450, 250));
 
-        jLabel2.setText("Expediente");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel2.setText("EXPEDIENTE");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
 
         tblPanel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,20 +159,23 @@ public class Expediente extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPanel);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 720, 360));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 450, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1216, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarDocumentos() {
