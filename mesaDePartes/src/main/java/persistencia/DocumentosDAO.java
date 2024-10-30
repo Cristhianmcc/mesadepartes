@@ -5,14 +5,15 @@
 package persistencia;
 
 import entidad.DocumentosE;
-import java.beans.Statement;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +29,10 @@ public class DocumentosDAO extends Conexion {
     PreparedStatement pst;
     ResultSet rs;
     CallableStatement cst;
+    
+    ArrayList<DocumentosE> listaDocumentos = new ArrayList<>();
+    DocumentosE documentos;
+    
 
  public String agregarDocumento(DocumentosE documento){
       String numeroExpediente = generarNumeroExpediente();
@@ -153,5 +158,43 @@ public DocumentosE buscarPorExpediente(String expediente){
         return documentos;
 }
 
+public ArrayList<DocumentosE> todoDocumentos(){
+        try {
+            try {
+                sql = "select * from documentos";
+                cone = getConexion();
+                st = cone.createStatement();
+                
+                rs = st.executeQuery(sql);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"Filtrado de todo documento con exito" + ex.getMessage());
+            }
+            while(rs.next()){
+                documentos = new DocumentosE();
+                documentos.setIddocumentos(rs.getInt(1));
+                documentos.setTipo_documento(rs.getString(2));
+                documentos.setDni(rs.getString(3));
+                documentos.setNombre(rs.getString(4));
+                documentos.setCorreo(rs.getString(5));
+                documentos.setDocumento(rs.getString(6));
+                documentos.setTramite(rs.getString(7));
+                documentos.setFolio(rs.getInt(8));
+                documentos.setFecha(rs.getDate(9));
+                documentos.setAsunto(rs.getString(10));
+                documentos.setDep_destino(rs.getString(11));
+                documentos.setArchivo(rs.getBytes(12));
+                documentos.setUrl(rs.getString(13));
+                documentos.setNumero_expediente(rs.getString(14));
+                documentos.setNombreArchivo(rs.getString(15));
+                
+                listaDocumentos.add(documentos); 
+            }
+            return listaDocumentos;
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error de lectura total de documentos" + ex.getMessage());
+        }
+        return null;
+}
 }
 

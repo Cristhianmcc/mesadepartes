@@ -146,5 +146,8 @@ public class DocumentosE {
     public void setNombreArchivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
     }
-    
+      @Override
+    public String toString() {
+        return this.nombreArchivo; // Cambia esto según lo que quieras mostrar
+    }
 }

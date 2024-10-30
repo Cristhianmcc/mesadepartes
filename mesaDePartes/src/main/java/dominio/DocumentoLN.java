@@ -5,6 +5,7 @@
 package dominio;
 
 import entidad.DocumentosE;
+import java.util.ArrayList;
 import persistencia.DocumentosDAO;
 
 /**
@@ -25,6 +26,9 @@ public class DocumentoLN {
     }
     public DocumentosE buscarPorExpediente(String expediente){
         return docu.buscarPorExpediente(expediente);
+    }
+    public ArrayList<DocumentosE> todoDocumentos(){
+        return docu.todoDocumentos();
     }
 
 }
