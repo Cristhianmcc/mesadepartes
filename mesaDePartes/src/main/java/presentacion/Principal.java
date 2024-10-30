@@ -67,8 +67,8 @@ DocumentosE documento = new DocumentosE();
         jLabel10 = new javax.swing.JLabel();
         lblNombreArchivo = new javax.swing.JLabel();
         lblfecha = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         cboDocumento = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -164,7 +164,7 @@ DocumentosE documento = new DocumentosE();
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 330, -1));
 
         txtAsunto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 660, 80));
+        jPanel3.add(txtAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 660, 80));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel17.setText("Dependencia(s) Destino(s):");
@@ -185,10 +185,10 @@ DocumentosE documento = new DocumentosE();
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel19.setText("URL del Anexo (leer indicaciones):");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 420, 200, -1));
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 200, -1));
 
         txtUrl.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel3.add(txtUrl, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 307, -1));
+        jPanel3.add(txtUrl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 307, -1));
 
         btnEnviar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnEnviar.setText("Enviar");
@@ -197,7 +197,7 @@ DocumentosE documento = new DocumentosE();
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, 91, 38));
+        jPanel3.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, 91, 38));
 
         txtDependecia.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtDependecia.setText("El Director");
@@ -224,8 +224,12 @@ DocumentosE documento = new DocumentosE();
         jPanel3.add(lblNombreArchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 350, 20));
 
         lblfecha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblfecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel3.add(lblfecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 150, 100, 20));
+
+        cboDocumento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cboDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Solicitud", "Otros" }));
+        jPanel3.add(cboDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 170, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 763, 550));
 
@@ -233,10 +237,6 @@ DocumentosE documento = new DocumentosE();
         jLabel2.setForeground(new java.awt.Color(0, 0, 51));
         jLabel2.setText("NUEVO TRAMITE");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, 40));
-
-        cboDocumento.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        cboDocumento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Solicitud", "Otros" }));
-        jPanel1.add(cboDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 170, -1));
 
         jScrollPane1.setViewportView(jPanel1);
 
@@ -250,7 +250,7 @@ DocumentosE documento = new DocumentosE();
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
         );
 
         pack();
