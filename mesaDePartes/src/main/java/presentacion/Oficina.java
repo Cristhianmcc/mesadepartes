@@ -12,6 +12,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -192,50 +193,66 @@ public class Oficina extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
 
-        // Guardar la información de oficina
-        oficina.setDni(txtDni.getText());
-        oficina.setNumexp(txtnumexp.getText());
-        oficina.setNombre(txtnombre.getText());
-        oficina.setCorreo(txtCorreo.getText());
-        oficina.setObservacion(txtObservacion.getText());
-        oficina.setFecha(java.sql.Date.valueOf(lblfecha.getText()));
+       // Guardar la información de oficina
+    oficina.setDni(txtDni.getText());
+    oficina.setNumexp(txtnumexp.getText());
+    oficina.setNombre(txtnombre.getText());
+    oficina.setCorreo(txtCorreo.getText());
+    oficina.setObservacion(txtObservacion.getText());
 
-        // Verificar si el archivo fue seleccionado
-        if (oficina.getArchivo() == null) {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo antes de enviar.");
-            return;
-        }
+    // Convertir y establecer la fecha
+    try {
+    String fechaString = lblfecha.getText();
+    if (fechaString == null || fechaString.trim().isEmpty()) {
+        throw new IllegalArgumentException("La fecha no puede estar vacía.");
+    }
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Cambiar el formato a dd/MM/yyyy
+    Date date = sdf.parse(fechaString);
+    oficina.setFecha(new java.sql.Date(date.getTime())); // Establecer la fecha
+} catch (ParseException e) {
+    JOptionPane.showMessageDialog(null, "Error al parsear la fecha: " + e.getMessage());
+    return; // Salir si hay un error
+} catch (IllegalArgumentException e) {
+    JOptionPane.showMessageDialog(null, e.getMessage());
+    return; // Salir si la fecha está vacía
+}
 
-        // Guardar la información en la base de datos
-        OficinaLN ln = new OficinaLN();
-        ln.agregarOficina(oficina);
-        JOptionPane.showMessageDialog(null, "Información de la oficina guardada con éxito.");
+    // Verificar si el archivo fue seleccionado
+    if (oficina.getArchivo() == null) {
+        JOptionPane.showMessageDialog(null, "Por favor, seleccione un archivo antes de enviar.");
+        return;
+    }
 
-        // Preparación del correo
-        String destinatario = oficina.getCorreo(); // Correo del estudiante o usuario
-        String asunto = "Documento recibido - Expediente: " + oficina.getNumexp();
-        String mensaje = "Estimado/a " + oficina.getNombre() + ",\n\nSe ha enviado el documento solicitado.\n\nSaludos cordiales.";
+    // Guardar la información en la base de datos
+    OficinaLN ln = new OficinaLN();
+    ln.agregarOficina(oficina);
+    JOptionPane.showMessageDialog(null, "Información de la oficina guardada con éxito.");
 
-        // Ruta del archivo que se guardó en Descargas o en la carpeta temporal
-        String rutaArchivo = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
-        System.out.println("Ruta del archivo adjunto: " + rutaArchivo); // Verificar la ruta en la consola
+    // Preparación del correo
+    String destinatario = oficina.getCorreo(); // Correo del estudiante o usuario
+    String asunto = "Documento recibido - Expediente: " + oficina.getNumexp();
+    String mensaje = "Estimado/a " + oficina.getNombre() + ",\n\nSe ha enviado el documento solicitado.\n\nSaludos cordiales.";
 
-        File archivoAdjunto = new File(rutaArchivo);
+    // Ruta del archivo que se guardó en Descargas o en la carpeta temporal
+    String rutaArchivo = System.getProperty("user.home") + "/Downloads/" + documento.getNombreArchivo();
+    System.out.println("Ruta del archivo adjunto: " + rutaArchivo); // Verificar la ruta en la consola
 
-        // Verificar si el archivo adjunto realmente existe
-        if (!archivoAdjunto.exists()) {
-            JOptionPane.showMessageDialog(this, "El archivo adjunto no se encontró en la ruta especificada: " + rutaArchivo);
-            return;
-        }
+    File archivoAdjunto = new File(rutaArchivo);
 
-        // Instancia de EmailService y envío de correo
-        EmailService emailService = new EmailService();
-        emailService.enviarCorreoConAdjunto(destinatario, asunto, mensaje, archivoAdjunto);
+    // Verificar si el archivo adjunto realmente existe
+    if (!archivoAdjunto.exists()) {
+        JOptionPane.showMessageDialog(this, "El archivo adjunto no se encontró en la ruta especificada: " + rutaArchivo);
+        return;
+    }
 
-        JOptionPane.showMessageDialog(this, "Documento enviado a " + destinatario);
+    // Instancia de EmailService y envío de correo
+    EmailService emailService = new EmailService();
+    emailService.enviarCorreoConAdjunto(destinatario, asunto, mensaje, archivoAdjunto);
 
-        // Limpiar los campos después de enviar
-        limpiarCampos();
+    JOptionPane.showMessageDialog(this, "Documento enviado a " + destinatario);
+
+    // Limpiar los campos después de enviar
+    limpiarCampos();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
