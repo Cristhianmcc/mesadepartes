@@ -323,7 +323,7 @@ JFileChooser fileChooser = new JFileChooser();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Principal form= new Principal();
+        Trámite form= new Trámite();
         form.setVisible(true);
         this.dispose();
         

@@ -71,7 +71,6 @@ public class Expediente extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         lblNombreArchivo = new javax.swing.JLabel();
         lblArchivoNombre = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPanel = new javax.swing.JTable();
@@ -110,7 +109,7 @@ public class Expediente extends javax.swing.JFrame {
                 btnEnviarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 70, -1));
+        jPanel2.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 70, -1));
 
         btnArchivo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnArchivo.setText("Archivo");
@@ -134,9 +133,6 @@ public class Expediente extends javax.swing.JFrame {
         lblArchivoNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         lblArchivoNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel2.add(lblArchivoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 220, 20));
-
-        jButton1.setText("jButton1");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 450, 250));
 
@@ -337,6 +333,9 @@ public class Expediente extends javax.swing.JFrame {
 
         if (resultado == null) {
             JOptionPane.showMessageDialog(this, "Expediente guardado exitosamente.");
+            Oficina frm = new Oficina();
+            frm.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Error al guardar el expediente: " + resultado);
         }
@@ -395,7 +394,6 @@ public class Expediente extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscaExpediente;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JComboBox<String> cboAreas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
