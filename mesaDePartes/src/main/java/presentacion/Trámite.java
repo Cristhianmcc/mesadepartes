@@ -9,6 +9,7 @@ import entidad.DocumentosE;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFileChooser;
@@ -282,7 +283,7 @@ DocumentosE documento = new DocumentosE();
 }
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        // Configurar los demás datos en el objeto DocumentosE existente
+        // Configurar otros datos en el objeto DocumentosE
     documento.setTipo_documento(cboDocumento.getSelectedItem().toString());
     documento.setDni(txtDni.getText());
     documento.setNombre(txtNombre.getText());
@@ -290,7 +291,24 @@ DocumentosE documento = new DocumentosE();
     documento.setDocumento(cboDocumento.getSelectedItem().toString());
     documento.setTramite(cboTramite.getSelectedItem().toString());
     documento.setFolio(Integer.parseInt(txtFolios.getText()));
-    documento.setFecha(java.sql.Date.valueOf(lblfecha.getText())); // Asegúrate del formato
+
+    // Convertir la fecha desde lblfecha
+        try {
+            String fechaString = lblfecha.getText();
+            if (fechaString == null || fechaString.trim().isEmpty()) {
+                throw new IllegalArgumentException("La fecha no puede estar vacía.");
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Cambiar el formato a dd/MM/yyyy
+            Date date = sdf.parse(fechaString);
+            documento.setFecha(new java.sql.Date(date.getTime())); // Establecer la fecha
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Error al parsear la fecha: " + e.getMessage());
+            return; // Salir si hay un error
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return; // Salir si la fecha está vacía
+        }
+
     documento.setAsunto(txtAsunto.getText());
     documento.setDep_destino(txtDependecia.getText());
     documento.setUrl(txtUrl.getText());
@@ -476,7 +494,7 @@ DocumentosE documento = new DocumentosE();
 
     private void initFechaActual() {
             // Define el formato de la fecha
-    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
     // Obtiene la fecha actual
     String fechaActual = formatoFecha.format(new Date());
     // Muestra la fecha en el campo de fecha (por ejemplo, txtFecha)
